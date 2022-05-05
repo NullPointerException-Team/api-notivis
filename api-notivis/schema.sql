@@ -7,13 +7,10 @@ USE `Notivis` ;
 
 DROP TABLE IF EXISTS `Notivis`.`aluno` ;
 
-CREATE TABLE `aluno` (
-                         `numero_matricula` int NOT NULL,
-                         `nome` varchar(45) NOT NULL,
-                         `ano_ingresso` int NOT NULL,
-                         `codigo_materia` int DEFAULT NULL,
+CREATE TABLE `alunos` (
+                         `numero_matricula` SERIAL NULL,
+                         `nome` varchar(100) NOT NULL,
                          PRIMARY KEY (`numero_matricula`),
-                         FOREIGN KEY (codigo_materia) REFERENCES materia(`codigo`),
                          UNIQUE KEY `numero_matricula_UNIQUE` (`numero_matricula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
