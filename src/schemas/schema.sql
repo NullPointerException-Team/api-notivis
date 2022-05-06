@@ -37,7 +37,7 @@ CREATE TABLE `materia` (
                            `numero_matricula_aluno` int DEFAULT NULL,
                            PRIMARY KEY (`codigo`),
                            FOREIGN KEY (`id_professor`) REFERENCES professor(`id`),
-                           FOREIGN KEY (`numero_matricula_aluno`) REFERENCES aluno(`numero_matricula`),
+                           FOREIGN KEY (`numero_matricula_aluno`) REFERENCES alunos(`numero_matricula`),
                            UNIQUE KEY `codigo_UNIQUE` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
