@@ -20,6 +20,6 @@ public class Pergunta {
 
   private String conteudo;
   private Integer numero_matricula_aluno;
-  private Boolean status_respondida;
+  private Boolean status_respondida = Boolean.FALSE;
 
 }

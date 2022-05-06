@@ -20,7 +20,7 @@ CREATE TABLE `perguntas` (
                              `id` SERIAL PRIMARY KEY,
                              `conteudo` TEXT NOT NULL ,
                              `numero_matricula_aluno` BIGINT UNSIGNED NOT NULL,
-                             `status_respondida` boolean default NULL,
+                             `status_respondida` boolean default FALSE,
                              CONSTRAINT fk_matricula_aluno FOREIGN KEY(numero_matricula_aluno)
                                  REFERENCES alunos(numero_matricula)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
