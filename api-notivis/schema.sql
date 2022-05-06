@@ -8,7 +8,7 @@ USE `Notivis` ;
 DROP TABLE IF EXISTS `Notivis`.`aluno` ;
 
 CREATE TABLE `alunos` (
-                         `numero_matricula` SERIAL NULL,
+                         `numero_matricula` SERIAL NOT NULL,
                          `nome` varchar(100) NOT NULL,
                          PRIMARY KEY (`numero_matricula`),
                          UNIQUE KEY `numero_matricula_UNIQUE` (`numero_matricula`)
@@ -16,11 +16,11 @@ CREATE TABLE `alunos` (
 
 DROP TABLE IF EXISTS `Notivis`.`anotacao` ;
 
-CREATE TABLE `anotacao` (
-                            `id` int NOT NULL,
-                            `tipo` varchar(45) NOT NULL,
-                            `conteudo` varchar(255) DEFAULT NULL,
+CREATE TABLE `perguntas` (
+                            `id` SERIAL NOT NULL,
+                            `conteudo` TEXT NOT NULL ,
                             `numero_matricula_aluno` int DEFAULT NULL,
+                            `status_respondida` boolean default NULL,
                             PRIMARY KEY (`id`),
                             FOREIGN KEY (`numero_matricula_aluno`) REFERENCES aluno(`numero_matricula`),
                             UNIQUE KEY `id_UNIQUE` (`id`)
