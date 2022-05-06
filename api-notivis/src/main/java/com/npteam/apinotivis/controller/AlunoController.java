@@ -2,8 +2,10 @@ package com.npteam.apinotivis.controller;
 
 import com.npteam.apinotivis.dao.AlunoDAO;
 import com.npteam.apinotivis.model.Aluno;
+import com.npteam.apinotivis.services.AlunoServiceImpl;
 import com.npteam.apinotivis.services.IAlunoServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,7 @@ import java.util.List;
 public class AlunoController {
 
   @Autowired
-  private IAlunoServices alunoServices;
+  private AlunoServiceImpl alunoServices;
 
   @Autowired
   private AlunoDAO alunoDAO;
