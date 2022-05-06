@@ -4,11 +4,11 @@ import com.npteam.apinotivis.dao.AlunoDAO;
 import com.npteam.apinotivis.model.Aluno;
 import com.npteam.apinotivis.services.IAlunoServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 // @CrossOrigin("*")
@@ -30,6 +30,15 @@ public class AlunoController {
     ResponseEntity<List<Aluno>> response = ResponseEntity.ok(alunoServices.listarAlunos());
     if (response != null) {
       return response;
+    }
+    return ResponseEntity.notFound().build();
+  }
+
+  @GetMapping("/alunos/buscar/{id}")
+  public ResponseEntity<?> buscarAlunoPorId(@PathVariable Integer id) {
+    Optional<Aluno> aluno = alunoDAO.findById(id);
+    if (!aluno.isEmpty()) {
+      return ResponseEntity.ok(aluno);
     }
     return ResponseEntity.notFound().build();
   }
