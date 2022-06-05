@@ -18,23 +18,6 @@ import java.util.List;
 @ControllerAdvice
 public class ReturnExceptionHandler extends ResponseEntityExceptionHandler {
 
-  @Override
-  protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                HttpHeaders headers,
-                                                                HttpStatus status,
-                                                                WebRequest request) {
-    List<Error.Campo> campos = new ArrayList<>();
-
-    for (ObjectError erro : ex.getBindingResult().getAllErrors()) {
-      String nomeError = ((FieldError) erro).getField();
-      String mensagem = erro.getDefaultMessage();
-
-      campos.add(new Error.Campo(nomeError, mensagem));
-    }
-    Error error = new Error(status.value(), OffsetDateTime.now(), "Um ou mais campos estão inválidos.", campos);
-    return handleExceptionInternal(ex, error, headers, status, request);
-  }
-
   @ExceptionHandler(ExceptionInterna.class)
   public ResponseEntity<Object> handleNegocio(ExceptionInterna ex, WebRequest request) {
     HttpStatus status = HttpStatus.BAD_REQUEST;
