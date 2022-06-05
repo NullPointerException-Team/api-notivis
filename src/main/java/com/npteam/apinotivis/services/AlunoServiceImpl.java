@@ -1,6 +1,7 @@
 package com.npteam.apinotivis.services;
 
 import com.npteam.apinotivis.dao.AlunoDAO;
+import com.npteam.apinotivis.exceptions.EntidadeNaoEncontradaException;
 import com.npteam.apinotivis.model.Aluno;
 import com.npteam.apinotivis.model.Materia;
 import org.hibernate.ObjectNotFoundException;
@@ -27,7 +28,7 @@ public class AlunoServiceImpl implements IAlunoServices {
   public Aluno listarAluno(Integer matricula) {
     Optional<Aluno> aluno = alunoDAO.findById(matricula);
 
-    return aluno.orElseThrow(()-> new ObjectNotFoundException(matricula, "Aluno"));
+    return aluno.orElseThrow(()-> new EntidadeNaoEncontradaException("Aluno não encontrado"));
   }
 
   public Aluno cadastrarAluno(Aluno aluno, Integer codigo) {

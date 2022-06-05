@@ -25,12 +25,9 @@ public class ProfessorService {
     }
 
     public Professor listarProfessor(Integer id_professor){
-//        Optional<Professor> professor = professorDAO.findById(id_professor);
-//
-//        return professor.orElseThrow(()-> new EntidadeNaoEncontradaException("Professor não encontrado"));
+        Optional<Professor> professor = professorDAO.findById(id_professor);
 
-        return professorDAO.findById(id_professor)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Professor não encontrado"));
+        return professor.orElseThrow(()-> new EntidadeNaoEncontradaException("Professor não encontrado"));
     }
 
     public Professor cadastrarProfessor(Professor professor, Integer codigo) {

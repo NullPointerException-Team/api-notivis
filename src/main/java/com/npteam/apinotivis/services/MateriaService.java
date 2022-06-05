@@ -1,6 +1,7 @@
 package com.npteam.apinotivis.services;
 
 import com.npteam.apinotivis.dao.MateriaDAO;
+import com.npteam.apinotivis.exceptions.EntidadeNaoEncontradaException;
 import com.npteam.apinotivis.model.Materia;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class MateriaService {
     public Materia listarMateria(Integer codigo) {
         Optional<Materia> materia = materiaDAO.findById(codigo);
 
-        return materia.orElseThrow(()-> new ObjectNotFoundException(codigo, "Matéria"));
+        return materia.orElseThrow(()-> new EntidadeNaoEncontradaException("Matéria não encontrada"));
     }
 
     public Materia cadastrarMateria(Materia materia) {

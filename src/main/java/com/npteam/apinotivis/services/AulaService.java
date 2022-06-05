@@ -1,6 +1,7 @@
 package com.npteam.apinotivis.services;
 
 import com.npteam.apinotivis.dao.AulaDAO;
+import com.npteam.apinotivis.exceptions.EntidadeNaoEncontradaException;
 import com.npteam.apinotivis.model.Aula;
 import com.npteam.apinotivis.model.Materia;
 import org.hibernate.ObjectNotFoundException;
@@ -34,7 +35,7 @@ public class AulaService {
     public Aula listarAula(Integer id_aula) {
         Optional<Aula> aula = aulaDAO.findById(id_aula);
 
-        return aula.orElseThrow(()-> new ObjectNotFoundException(id_aula, "Aula"));
+        return aula.orElseThrow(()-> new EntidadeNaoEncontradaException("Aula não encontrada"));
     }
 
 }
