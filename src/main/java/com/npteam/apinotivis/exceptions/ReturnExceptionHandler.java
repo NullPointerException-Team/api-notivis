@@ -7,6 +7,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ControllerAdvice
-public class ExceptionHandler extends ResponseEntityExceptionHandler {
+public class ReturnExceptionHandler extends ResponseEntityExceptionHandler {
 
   @Override
   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
@@ -32,5 +33,14 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     }
     Error error = new Error(status.value(), OffsetDateTime.now(), "Um ou mais campos estão inválidos.", campos);
     return handleExceptionInternal(ex, error, headers, status, request);
+  }
+
+  @ExceptionHandler(EntidadeNaoEncontradaException.class)
+  public ResponseEntity<Object> handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException ex, WebRequest request) {
+    HttpStatus status = HttpStatus.NOT_FOUND;
+
+    Error error = new Error(status.value(), OffsetDateTime.now(), ex.getMessage());
+
+    return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
   }
 }
