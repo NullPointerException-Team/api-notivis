@@ -35,8 +35,17 @@ public class ReturnExceptionHandler extends ResponseEntityExceptionHandler {
     return handleExceptionInternal(ex, error, headers, status, request);
   }
 
+  @ExceptionHandler(ExceptionInterna.class)
+  public ResponseEntity<Object> handleNegocio(ExceptionInterna ex, WebRequest request) {
+    HttpStatus status = HttpStatus.BAD_REQUEST;
+
+    Error error = new Error(status.value(), OffsetDateTime.now(), ex.getMessage());
+
+    return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
+  }
+
   @ExceptionHandler(EntidadeNaoEncontradaException.class)
-  public ResponseEntity<Object> handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException ex, WebRequest request) {
+  public ResponseEntity<Object> handleEntidadeNaoEncontrada(ExceptionInterna ex, WebRequest request) {
     HttpStatus status = HttpStatus.NOT_FOUND;
 
     Error error = new Error(status.value(), OffsetDateTime.now(), ex.getMessage());

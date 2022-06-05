@@ -1,6 +1,8 @@
 package com.npteam.apinotivis.services;
 
 import com.npteam.apinotivis.dao.ProfessorDAO;
+import com.npteam.apinotivis.exceptions.EntidadeNaoEncontradaException;
+import com.npteam.apinotivis.exceptions.ReturnExceptionHandler;
 import com.npteam.apinotivis.model.Materia;
 import com.npteam.apinotivis.model.Professor;
 import org.hibernate.ObjectNotFoundException;
@@ -23,9 +25,12 @@ public class ProfessorService {
     }
 
     public Professor listarProfessor(Integer id_professor){
-        Optional<Professor> professor = professorDAO.findById(id_professor);
+//        Optional<Professor> professor = professorDAO.findById(id_professor);
+//
+//        return professor.orElseThrow(()-> new EntidadeNaoEncontradaException("Professor não encontrado"));
 
-        return professor.orElseThrow(()-> new ObjectNotFoundException(id_professor, "Professor"));
+        return professorDAO.findById(id_professor)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Professor não encontrado"));
     }
 
     public Professor cadastrarProfessor(Professor professor, Integer codigo) {
