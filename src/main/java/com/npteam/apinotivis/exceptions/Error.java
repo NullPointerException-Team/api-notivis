@@ -29,7 +29,7 @@ public class Error {
 
   @Getter
   @AllArgsConstructor
-  public class Campo {
+  public static class Campo {
     private String nome;
     private String mensagem;
   }
