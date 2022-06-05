@@ -25,8 +25,8 @@ public class AlunoController {
     }
 
     @GetMapping("/alunos/buscar/{id}")
-    public ResponseEntity<Optional<Aluno>> buscarAlunoPorId(@PathVariable Integer id) {
-      return ResponseEntity.ok().body(alunoDAO.findById(id));
+    public ResponseEntity<Aluno> buscarAlunoPorId(@PathVariable Integer id) {
+      return ResponseEntity.ok().body(alunoServices.buscarAlunoPorId(id));
     }
 
     @PostMapping("/alunos/cadastrar/materia/{codigo}")

@@ -37,4 +37,9 @@ public class AlunoServiceImpl implements IAlunoServices {
 
     return alunoDAO.save(aluno);
   }
+
+  public Aluno buscarAlunoPorId(Integer id) {
+    return alunoDAO.findById(id)
+            .orElseThrow(() -> new EntidadeNaoEncontradaException("Aluno não encontrado"));
+  }
 }
